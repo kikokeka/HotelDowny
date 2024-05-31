@@ -39,18 +39,24 @@ namespace GUI
                 worksheet = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Sheets["Sheet1"];
                 //đặt tên cho sheet
                 worksheet.Name = name;
-
+                Microsoft.Office.Interop.Excel.Range head = worksheet.get_Range("A1", "G1");
+                head.MergeCells = true;
+                head.Value2 = name;
+                head.Font.Bold = true;
+                head.Font.Name = "Time new Roman";
+                head.Font.Size = "20";
+                head.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                 // export header trong DataGridView
                 for (int i = 0; i < dataGridView1.ColumnCount; i++)
                 {
-                    worksheet.Cells[1, i + 1] = dataGridView1.Columns[i].HeaderText;
+                    worksheet.Cells[2, i + 1] = dataGridView1.Columns[i].HeaderText;
                 }
                 // export nội dung trong DataGridView
                 for (int i = 0; i < dataGridView1.RowCount; i++)
                 {
                     for (int j = 0; j < dataGridView1.ColumnCount; j++)
                     {
-                        worksheet.Cells[i + 2, j + 1] = dataGridView1.Rows[i].Cells[j].Value.ToString();
+                        worksheet.Cells[i + 3, j + 1] = dataGridView1.Rows[i].Cells[j].Value.ToString();
                     }
                 }
                 // sử dụng phương thức SaveAs() để lưu workbook với filename
@@ -58,11 +64,11 @@ namespace GUI
                 //đóng workbook
                 workbook.Close();
                 excel.Quit();
-                CusMessage.Show("Xuất dữ liệu ra Excel thành công!");
+                MessageBox.Show("Xuất dữ liệu ra Excel thành công!");
             }
             catch (Exception ex)
             {
-                CusMessage.Show(ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -90,30 +96,44 @@ namespace GUI
 
                 try
                 {
-                    oXL = new Microsoft.Office.Interop.Excel.Application { SheetsInNewWorkbook = 1 }; 
+                    oXL = new Microsoft.Office.Interop.Excel.Application { SheetsInNewWorkbook = 1 };
                     // Create a new instance of Excel application
                     // Tạo một thể hiện mới của ứng dụng Excel
                     oWB = oXL.Workbooks.Add(Missing.Value); // Create a new workbook
                                                             // Tạo một workbook mới
-                    oXL.Calculation = Microsoft.Office.Interop.Excel.XlCalculation.xlCalculationManual; 
+                    oXL.Calculation = Microsoft.Office.Interop.Excel.XlCalculation.xlCalculationManual;
                     // Set calculation mode to manual
                     // Đặt chế độ tính toán thành thủ công
-                    
+
                     oSheet = (Microsoft.Office.Interop.Excel._Worksheet)oWB.Sheets[1]; // Get the first worksheet
                                                                                        // Lấy worksheet đầu tiên
-                    oSheet.Name = lv.Tag.ToString();
+                    Microsoft.Office.Interop.Excel.Range head = oSheet.get_Range("A1", "G1");
+                    head.MergeCells = true;
+                    head.Value2 = lv.Tag.ToString();
+                    head.Font.Bold = true;
+                    head.Font.Name = "Time new Roman";
+                    head.Font.Size = "20";
+                    head.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    //oSheet.Name = lv.Tag.ToString();
                     // Copy ListView column headers to Excel if specified
                     // Sao chép tiêu đề cột của ListView vào Excel nếu được chỉ định
-                    int iCol = -1;
-                    for (iCol = 1; iCol <= lv.Columns.Count && bColHdr; iCol++)
-                        oSheet.Cells[1, iCol] = lv.Columns[iCol - 1].Text;
-
-                    // Copy ListView items to Excel
-                    // Sao chép các mục của ListView vào Excel
-                    for (int iRow = 1; iRow <= lv.Items.Count; iRow++)
+                    int startRow = 2; // Bắt đầu từ hàng thứ hai
+                    if (bColHdr)
                     {
-                        for (iCol = 1; iCol <= lv.Items[iRow - 1].SubItems.Count; iCol++)
-                            oSheet.Cells[bColHdr ? iRow + 1 : iRow, iCol] = lv.Items[iRow - 1].SubItems[iCol - 1].Text;
+                        for (int iCol = 1; iCol <= lv.Columns.Count; iCol++)
+                        {
+                            oSheet.Cells[startRow, iCol] = lv.Columns[iCol - 1].Text;
+                        }
+                        startRow++; // Bắt đầu sao chép các mục từ hàng kế tiếp
+                    }
+
+                    // Sao chép các mục của ListView vào Excel
+                    for (int iRow = 0; iRow < lv.Items.Count; iRow++)
+                    {
+                        for (int iCol = 1; iCol <= lv.Items[iRow].SubItems.Count; iCol++)
+                        {
+                            oSheet.Cells[startRow + iRow, iCol] = lv.Items[iRow].SubItems[iCol - 1].Text;
+                        }
                     }
 
                     try
@@ -149,7 +169,7 @@ namespace GUI
             }
             catch (Exception ex)
             {
-                CusMessage.Show(ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {

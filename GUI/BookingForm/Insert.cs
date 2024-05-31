@@ -33,7 +33,7 @@ namespace GUI.BookingForm
             lst.Add(txt_ttt.Text);
             lst.Add(txt_namekh.Text);
             lst.Add(txt_sdt.Text);
-            string checkvalid = BookingBLL.Instance.checkvalid(lst);
+            string checkvalid = BookingBLL.Instance.CheckValid(lst);
             if (checkvalid != "")
             {
                 CusMessage.Show(checkvalid, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);

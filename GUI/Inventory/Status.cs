@@ -161,8 +161,13 @@ namespace GUI.Inventory
 
         private void dtgrv_nhapkho_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
+                if (dtgrv_nhapkho.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag == null)
+                {
+                    return;
+                }
                 lb_mess.Text = "Chỉnh sửa";
                 bt_save.Tag = "Sửa";
                 pn_update.Visible = true;
