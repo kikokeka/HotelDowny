@@ -50,7 +50,7 @@ namespace GUI.ManageSys
 
         private void bt_export_Click(object sender, EventArgs e)
         {
-            lsv_time.Tag = $"Chấm công";
+            lsv_time.Tag = $"Chấm công tháng {dtpk_ngay.Value.ToString("MM-yyyy")}";
             Program.ExportListView(lsv_time);
         }
 

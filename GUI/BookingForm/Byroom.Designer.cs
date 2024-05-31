@@ -422,6 +422,7 @@
             // 
             // flp_phong
             // 
+            this.flp_phong.AutoScroll = true;
             this.flp_phong.BackColor = System.Drawing.Color.AliceBlue;
             this.flp_phong.Dock = System.Windows.Forms.DockStyle.Top;
             this.flp_phong.Location = new System.Drawing.Point(0, 253);

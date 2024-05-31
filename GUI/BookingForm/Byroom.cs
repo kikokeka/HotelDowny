@@ -190,25 +190,29 @@ namespace GUI.Booking
         {
             if (GUI.BookingForm.Update.status == true) Loaddata();
         }
+        private void bt_addroom_Click(object sender, EventArgs e)
+        {
+            if (RoomButton.check == true)
+            {
+                RoomButton.Instance.Show();
+                RoomButton.tenphong = null;
+                RoomButton.check = false;
+                RoomButton.Instance.FormClosed += Instance_FormClosed;
+            }
+        }
 
-        private void Form_FormClosed(object sender, FormClosedEventArgs e)
+        private void Instance_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (RoomButton.tenphong != null)
             {
                 bt_addroom.Enabled = false;
+                RoomButton.check = true;
                 Button btn = RoomButton.tenphong;
                 btn.Size = new Size(78, 40);
                 btn.Click += Btn_Click;
                 flp_phong.Controls.Add(btn);
                 flp_phong.Tag = btn.Text;
             }
-        }
-        private void bt_addroom_Click(object sender, EventArgs e)
-        {
-            RoomButton form = new RoomButton();
-            form.Show();
-            RoomButton.tenphong = null;
-            form.FormClosed += Form_FormClosed;
         }
 
         private void Btn_Click(object sender, EventArgs e)

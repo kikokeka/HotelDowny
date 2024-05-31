@@ -23,6 +23,7 @@ namespace GUI
             private set { RoomButton.instance = value; }
         }
         public static Button tenphong;
+        public static bool check = true;
         List<Button> roomallbtn = new List<Button>();
         List<Button> roombtn = new List<Button>();
         public RoomButton()

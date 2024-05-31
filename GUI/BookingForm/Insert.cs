@@ -54,9 +54,13 @@ namespace GUI.BookingForm
 
         private void bt_addroom_Click(object sender, EventArgs e)
         {
-            RoomButton form = new RoomButton();
-            form.Show();
-            form.FormClosed += Form_FormClosed;
+            if (RoomButton.check == true)
+            {
+                RoomButton.check = false;
+                RoomButton form = new RoomButton();
+                form.Show();
+                form.FormClosed += Form_FormClosed;
+            }
         }
 
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
@@ -64,6 +68,7 @@ namespace GUI.BookingForm
             if (RoomButton.tenphong != null)
             {
                 bt_addroom.Enabled = false;
+                RoomButton.check = true;
                 Button btn = RoomButton.tenphong;
                 btn.Size = new Size(78, 40);
                 btn.Click += Btn_Click;

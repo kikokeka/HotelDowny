@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AccForm));
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
             this.bt_add = new Guna.UI2.WinForms.Guna2Button();
             this.lsv_acc = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -45,6 +45,7 @@
             this.lb_message = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.txt_tim = new Guna.UI2.WinForms.Guna2TextBox();
             this.bt_wage = new Guna.UI2.WinForms.Guna2Button();
+            this.pn_timekeeping = new System.Windows.Forms.Panel();
             this.pn_insert.SuspendLayout();
             this.pn_logo.SuspendLayout();
             this.SuspendLayout();
@@ -85,7 +86,7 @@
             this.lsv_acc.GridLines = true;
             this.lsv_acc.HideSelection = false;
             this.lsv_acc.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem2});
             this.lsv_acc.Location = new System.Drawing.Point(12, 174);
             this.lsv_acc.Name = "lsv_acc";
             this.lsv_acc.Size = new System.Drawing.Size(587, 242);
@@ -317,6 +318,13 @@
             this.bt_wage.UseTransparentBackground = true;
             this.bt_wage.Click += new System.EventHandler(this.bt_wage_Click);
             // 
+            // pn_timekeeping
+            // 
+            this.pn_timekeeping.Location = new System.Drawing.Point(169, 78);
+            this.pn_timekeeping.Name = "pn_timekeeping";
+            this.pn_timekeeping.Size = new System.Drawing.Size(929, 487);
+            this.pn_timekeeping.TabIndex = 99;
+            // 
             // AccForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
@@ -328,6 +336,7 @@
             this.Controls.Add(this.txt_tim);
             this.Controls.Add(this.lsv_acc);
             this.Controls.Add(this.bt_add);
+            this.Controls.Add(this.pn_timekeeping);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(5);
@@ -356,5 +365,6 @@
         private Guna.UI2.WinForms.Guna2TextBox txt_xnmk;
         private Guna.UI2.WinForms.Guna2TextBox txt_tim;
         private Guna.UI2.WinForms.Guna2Button bt_wage;
+        private System.Windows.Forms.Panel pn_timekeeping;
     }
 }

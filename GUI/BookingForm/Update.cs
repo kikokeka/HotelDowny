@@ -80,6 +80,7 @@ namespace GUI.BookingForm
         #region Events
         private void bt_addroom_Click(object sender, EventArgs e)
         {
+            bt_addroom.Enabled = false;
             RoomButton form = new RoomButton();
             form.Show();
             RoomButton.tenphong = null;

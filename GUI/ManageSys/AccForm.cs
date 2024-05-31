@@ -15,13 +15,30 @@ namespace GUI.ManageSys
 {
     public partial class AccForm : Form
     {
+        Form currentFormChild = null;
         List<string> id = new List<string>();
         public AccForm()
         {
             InitializeComponent();
             Main.Instance.lb_main.Text = "Quản lý tài khoản";
             pn_insert.Visible = false;
+            pn_timekeeping.Visible = false;
             Loaddata();
+        }
+        void openform(Form childform)
+        {
+            if (currentFormChild != null)
+            {
+                currentFormChild.Dispose();
+            }
+            currentFormChild = childform;
+            childform.TopLevel = false;
+            childform.FormBorderStyle = FormBorderStyle.None;
+            childform.Dock = DockStyle.Fill;
+            pn_timekeeping.Controls.Add(childform);
+            pn_timekeeping.Tag = childform;
+            childform.BringToFront();
+            childform.Show();
         }
         void Loaddata()
         {
@@ -101,7 +118,9 @@ namespace GUI.ManageSys
 
         private void bt_wage_Click(object sender, EventArgs e)
         {
-            new Timekeeping().Show();
+            pn_timekeeping.Visible = true;
+            pn_timekeeping.BringToFront();
+            openform(new Timekeeping());
         }
     }
 }

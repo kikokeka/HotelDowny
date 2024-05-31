@@ -102,6 +102,7 @@ namespace GUI.ManageSys
             tong.SubItems.Add("");
             tong.SubItems.Add(total.ToString());
             lsv_dtmenu.Items.Add(tong);
+            lsv_dtmenu.Tag = $"Doanhthu menu từ {dtpk_startmenu.Value.ToString("dd-MM")} đến {dtpk_endmenu.Value.ToString("dd-MM")}";
         }
         void Loadroomrevenue()
         {
@@ -131,6 +132,7 @@ namespace GUI.ManageSys
             tong.SubItems.Add("");
             tong.SubItems.Add(total.ToString());
             lsv_dtp.Items.Add(tong);
+            lsv_dtp.Tag = $"Doanhthu phóng từ {dtpk_startroom.Value.ToString("dd-MM")} đến {dtpk_endroom.Value.ToString("dd-MM")}";
         }
 
 
@@ -162,6 +164,7 @@ namespace GUI.ManageSys
             tong.SubItems.Add("");
             tong.SubItems.Add(total.ToString());
             lsv_thuchi.Items.Add(tong);
+            lsv_thuchi.Tag = $"Các khoản thu từ {dtpk_startother.Value.ToString("dd-MM")} đến {dtpk_endother.Value.ToString("dd-MM")}";
         }
         int GetTotalPrice(object obj)
         {
